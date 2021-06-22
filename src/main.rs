@@ -6,13 +6,15 @@ use rand::Rng;
 use rand::thread_rng;
 use regex::Regex;
 
+// \d?d\d+(k(h|l)\d+)?(x\d+)?(\+\d+)?   --> ideal dice notation regex with keep high and keep low, as well as multiply and +
+
 fn roll_dice(format_string: String) {
     // initializers
     let mut rng = thread_rng();
     let mut sum: u32 = 0;
 
     // Use regex to determine if it is a valid dice formatted string
-    let re = Regex::new(r"\d?d\d+(h?l?\d+)?(-\d+)?(\+\d+)?").unwrap();
+    let re = Regex::new(r"\d?d\d+(\+\d+)?").unwrap();
     if !re.is_match(&format_string) {
         panic!("Usage: must contain standard dice format (ex. 3d4 rolls a 4 sided die 3 times)")
     }
