@@ -37,10 +37,15 @@ fn roll_dice(format_string: String) {
     }
 
     // roll die
-    for _i in 0..num_of_die {
+    for i in 0..num_of_die {
         let randu32 = rng.gen_range(0, sides) + modifier + 1; 
         sum = randu32 + sum; 
-        println!("{},", randu32);
+        if i != num_of_die - 1 {
+            println!("{},", randu32);
+        } else {
+            println!("{}\n", randu32);
+        }
+        
     }
 
     println!("Sum of rolls: {:?}", sum);
