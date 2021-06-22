@@ -1,12 +1,10 @@
 extern crate regex;
 extern crate rand;
+
 use std::env;
 use rand::Rng;
 use rand::thread_rng;
 use regex::Regex;
-
-
-//  \d?d\d+(h?l?\d+)?(-\d+)?(\+\d+)?      <- Regex for dice notation   
 
 fn roll_dice(format_string: String) {
     // initializers
@@ -27,15 +25,17 @@ fn roll_dice(format_string: String) {
     let val: Vec<&str> = format_string.split(|c| c == 'd' || c == '+').collect::<Vec<&str>>();
 
     // assign each val to a u32 variable and parse it
-    let num_of_die = val[0].parse::<u32>().unwrap();
-    let sides = val[1].parse::<u32>().unwrap();
     let mut modifier: u32 = 0;
-    if val.len() == 3 { //if there is a modifier present
-        modifier = val[2].parse::<u32>().unwrap();
+    let num_of_die =    val[0].parse::<u32>().unwrap();
+    let sides =         val[1].parse::<u32>().unwrap();
+
+    //if there is a modifier present
+    if val.len() == 3 {
+        modifier =      val[2].parse::<u32>().unwrap();
     }
 
     // roll die
-    for i in 0..num_of_die {
+    for _i in 0..num_of_die {
         let randu32 = rng.gen_range(0, sides) + modifier + 1; 
         sum = randu32 + sum; 
         println!("{},", randu32);
